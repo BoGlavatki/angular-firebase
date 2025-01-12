@@ -1,1 +1,13 @@
+@if (authService.currentUserSig()== null) {<div>
+  <h1>{{name}}</h1>
+  <ul>
+    <li><a routerLink="/login">Login</a></li>
+    <li><a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a></li>
+  </ul>
+</div>}
+@if ((authService.currentUserSig())) {
+<div>
+  <span (click)="logout()">Logout</span>
+</div>
+}
 <router-outlet></router-outlet>

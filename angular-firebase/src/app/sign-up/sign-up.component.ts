@@ -13,7 +13,10 @@ import { AuthService } from '../auth.service';
   imports: [ReactiveFormsModule, HttpClientModule],
 })
 
+
+
 export class SignUpComponent {
+
   fb = inject(FormBuilder);
   http = inject(HttpClient);
   authService = inject(AuthService);
@@ -28,9 +31,14 @@ export class SignUpComponent {
 
   onSubmit(): void {
     const rawForm = this.form.getRawValue()
-    this.authService.register(rawForm.email, rawForm.username, rawForm.password).subscribe(() => {
+    this.authService.register(rawForm.email, rawForm.username, rawForm.password).subscribe({
+      next: () => {
       this.router.navigateByUrl('/');
-    })
+    },
+  error: (err) =>{
+    this.errorMessage = err.code;
+  }
+  })
   
     
   }
